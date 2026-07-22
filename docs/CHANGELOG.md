@@ -19,6 +19,11 @@ The project follows semantic versioning.
 - Repository-wide EditorConfig rules
 - Automated Kotlin formatting with ktlint
 - Kotlin formatting validation in continuous integration
+- Yellow Track Design System theme foundation
+- Shared light and dark color schemes
+- Shared typography, shape, and spacing tokens
+- Reusable button, card, badge, and metric-card components
+- Cross-platform design-system showcase
 
 ## 0.1.0 — Genesis
 
