@@ -16,6 +16,9 @@ The project follows semantic versioning.
 - Project vision, roadmap, architecture, and contribution guidance
 - Initial architecture decision records
 - Foundation package
+- Repository-wide EditorConfig rules
+- Automated Kotlin formatting with ktlint
+- Kotlin formatting validation in continuous integration
 
 ## 0.1.0 — Genesis
 

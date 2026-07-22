@@ -10,9 +10,7 @@ sealed interface PlatformResult<out T> {
     ) : PlatformResult<Nothing>
 }
 
-inline fun <T, R> PlatformResult<T>.map(
-    transform: (T) -> R,
-): PlatformResult<R> =
+inline fun <T, R> PlatformResult<T>.map(transform: (T) -> R): PlatformResult<R> =
     when (this) {
         is PlatformResult.Success -> PlatformResult.Success(transform(value))
         is PlatformResult.Failure -> this
