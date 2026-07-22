@@ -1,51 +1,94 @@
 package com.yellowtrack.platform
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.safeContentPadding
-import androidx.compose.material3.Button
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import org.jetbrains.compose.resources.painterResource
-import yellow_track_platform.shared.generated.resources.Res
-import yellow_track_platform.shared.generated.resources.compose_multiplatform
+import com.yellowtrack.platform.designsystem.YTSTheme
+import com.yellowtrack.platform.designsystem.YellowTrackTheme
+import com.yellowtrack.platform.designsystem.components.YTSBadge
+import com.yellowtrack.platform.designsystem.components.YTSMetricCard
+import com.yellowtrack.platform.designsystem.components.YTSPrimaryButton
+import com.yellowtrack.platform.designsystem.components.YTSSecondaryButton
 
 @Composable
-@Preview
 fun App() {
-    MaterialTheme {
-        var showContent by remember { mutableStateOf(false) }
-        Column(
-            modifier =
-                Modifier
-                    .background(MaterialTheme.colorScheme.primaryContainer)
-                    .safeContentPadding()
-                    .fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
+    YellowTrackTheme {
+        Surface(
+            modifier = Modifier.fillMaxSize(),
+            color = MaterialTheme.colorScheme.background,
         ) {
-            Button(onClick = { showContent = !showContent }) {
-                Text("Click me!")
-            }
-            AnimatedVisibility(showContent) {
-                val greeting = remember { Greeting().greet() }
-                Column(
+            Column(
+                modifier =
+                    Modifier
+                        .fillMaxSize()
+                        .padding(YTSTheme.spacing.extraLarge),
+                verticalArrangement =
+                    Arrangement.spacedBy(
+                        YTSTheme.spacing.large,
+                    ),
+            ) {
+                YTSBadge(text = "0.1.0 Genesis")
+
+                Text(
+                    text = "Yellow Track Platform",
+                    style = MaterialTheme.typography.headlineLarge,
+                )
+
+                Text(
+                    text = "Cross-platform software for photographers.",
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+
+                Row(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalAlignment = Alignment.CenterHorizontally,
+                    horizontalArrangement =
+                        Arrangement.spacedBy(
+                            YTSTheme.spacing.medium,
+                        ),
                 ) {
-                    Image(painterResource(Res.drawable.compose_multiplatform), null)
-                    Text("Compose: $greeting")
+                    YTSMetricCard(
+                        label = "Clients",
+                        value = "0",
+                        modifier = Modifier.weight(1f),
+                    )
+
+                    YTSMetricCard(
+                        label = "Sessions",
+                        value = "0",
+                        modifier = Modifier.weight(1f),
+                    )
+
+                    YTSMetricCard(
+                        label = "Deliveries",
+                        value = "0",
+                        modifier = Modifier.weight(1f),
+                    )
+                }
+
+                Row(
+                    horizontalArrangement =
+                        Arrangement.spacedBy(
+                            YTSTheme.spacing.medium,
+                        ),
+                ) {
+                    YTSPrimaryButton(
+                        text = "Begin",
+                        onClick = {},
+                    )
+
+                    YTSSecondaryButton(
+                        text = "Documentation",
+                        onClick = {},
+                    )
                 }
             }
         }

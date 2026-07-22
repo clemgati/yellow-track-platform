@@ -17,7 +17,7 @@ dependencies {
 
 compose.desktop {
     application {
-        mainClass = "com.yellowtrack.platform.MainKt"
+        mainClass = "com.yellowtrack.platform.DesktopAppKt"
 
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
