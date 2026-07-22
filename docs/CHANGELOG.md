@@ -24,6 +24,11 @@ The project follows semantic versioning.
 - Shared typography, shape, and spacing tokens
 - Reusable button, card, badge, and metric-card components
 - Cross-platform design-system showcase
+- Responsive Yellow Track application shell
+- Sidebar navigation for expanded layouts
+- Bottom navigation for compact layouts
+- Shared top-level application state
+- Dashboard, Clients, Sessions, Studio, and Settings placeholders
 
 ## 0.1.0 — Genesis
 
