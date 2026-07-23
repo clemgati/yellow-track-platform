@@ -37,7 +37,7 @@ private fun ExpandedAppShell(appState: AppState) {
     ) {
         ExpandedSidebar(
             currentDestination = appState.currentDestination,
-            onDestinationSelected = appState::navigateTo,
+            onDestinationSelected = appState::navigateTopLevel,
         )
 
         PlaceholderScreen(
@@ -53,7 +53,7 @@ private fun CompactAppShell(appState: AppState) {
         bottomBar = {
             CompactNavigationBar(
                 currentDestination = appState.currentDestination,
-                onDestinationSelected = appState::navigateTo,
+                onDestinationSelected = appState::navigateTopLevel,
             )
         },
     ) { contentPadding ->
