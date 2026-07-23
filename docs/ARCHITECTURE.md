@@ -1,94 +1,224 @@
-# Architecture
+# Yellow Track Platform Architecture
 
-## Current approach
+> **Build with intention. Create without friction.**
 
-Yellow Track Platform begins as a small Kotlin Multiplatform project with separate platform applications and one shared module:
+**Status:** Living Document  
+**Version:** 0.1  
+**Last Updated:** 2026-07-22
 
-```text
-androidApp/
-desktopApp/
-iosApp/
-shared/
+---
+
+# Purpose
+
+This document describes the architectural principles and organization of
+Yellow Track Platform.
+
+It explains how the platform is structured today and the direction it is
+expected to evolve over time.
+
+Architecture exists to make change easier.
+
+---
+
+# Guiding Principles
+
+The architecture should:
+
+- Separate responsibilities clearly.
+- Keep business logic platform independent.
+- Minimize coupling.
+- Maximize maintainability.
+- Support incremental evolution.
+
+---
+
+# High-Level Architecture
+
+```
+                Applications
+        ┌─────────┼─────────┐
+        │         │         │
+    Android      iOS     Desktop
+        │         │         │
+        └─────────┼─────────┘
+                  │
+              Shared Module
+                  │
+    ┌─────────────┼─────────────┐
+    │             │             │
+  Core         Domain       Features
 ```
 
-The project will favor packages before additional Gradle modules. Modules will be extracted when they provide clear benefits such as dependency boundaries, build isolation, ownership, or reusable publication.
+Applications compose the experience.
 
-## Architectural style
+Shared contains the product.
 
-The platform will use clean, hexagonal principles without forcing unnecessary ceremony.
+---
 
-```text
-Platform UI
-    ↓
-Presentation
-    ↓
-Use cases
-    ↓
-Domain ports
-    ↓
-Adapters
+# Dependency Direction
+
+Dependencies always point inward.
+
+```
+Applications
+      │
+      ▼
+Features
+      │
+      ▼
+Domain
+      │
+      ▼
+Core
 ```
 
-Adapters may include:
+Core never depends on Domain.
 
-- Local database
+Domain never depends on Features.
+
+Platform applications should avoid containing business logic.
+
+---
+
+# Responsibilities
+
+## Core
+
+Provides reusable platform capabilities.
+
+Examples:
+
+- Design System
+- Navigation
 - Preferences
-- File system
-- Networking
-- Lightroom launcher
-- Cloud integrations
+- Resources
+- Utilities
+- Logging
 
-The domain layer must not depend on Compose, Android, AppKit, UIKit, SQL libraries, or networking implementations.
+Core should remain stable.
 
-## Initial package direction
+---
 
-```text
-com.yellowtrack.platform
+## Domain
 
-foundation/
-domain/
-data/
-presentation/
-designsystem/
-navigation/
-```
+Represents the business concepts of the platform.
 
-Only `foundation` is introduced during the project-identity pull request.
+Examples:
 
-## Dependency direction
+- Client
+- Session
+- Studio
+- Gear
+- Lighting Recipe
 
-Dependencies should point inward:
+Domain contains business rules.
 
-```text
-platform apps
-    → presentation
-    → domain
-    → foundation
-```
+Domain does not know how data is stored.
 
-Infrastructure adapters implement contracts owned by the domain or application layer.
+---
 
-## State management
+## Data
 
-- Coroutines and Flow will be used for asynchronous work and observable state.
-- Presentation models should expose immutable state.
-- Platform lifecycle details should remain outside domain logic.
+Responsible for persistence and external systems.
 
-## Persistence
+Examples:
 
-Persistence will be introduced with explicit schema versions and tested migrations. Database entities must not leak directly into the UI.
+- Database
+- Preferences
+- File Storage
+- Network APIs
 
-## Platform-specific code
+Data implements contracts defined by the Domain.
 
-Use `expect`/`actual`, interfaces, or injected adapters only when sharing is beneficial. Native platform integrations should not be hidden behind abstractions that make them harder to use correctly.
+---
 
-## Testing
+## Features
 
-The project will prioritize:
+Features provide complete user workflows.
 
-- Domain unit tests
-- Use-case tests
-- Repository contract tests
-- Migration tests
-- Platform integration tests where necessary
-- Compose UI tests for critical workflows
+Examples:
+
+- Dashboard
+- Clients
+- Sessions
+- Studio
+- Settings
+
+Features compose Domain and Core.
+
+---
+
+# Platform Applications
+
+Android
+
+Provides Android-specific integration.
+
+iOS
+
+Provides iOS-specific integration.
+
+Desktop
+
+Provides desktop-specific integration.
+
+Platform applications should remain intentionally thin.
+
+---
+
+# Design System
+
+Visual consistency is provided through a shared design system.
+
+It should include:
+
+- Colors
+- Typography
+- Icons
+- Spacing
+- Components
+- Themes
+
+The design system should evolve independently from features.
+
+---
+
+# Navigation
+
+Navigation should be shared whenever practical.
+
+Business logic should never depend on navigation frameworks.
+
+---
+
+# Evolution Strategy
+
+The architecture is expected to evolve.
+
+Refactoring is encouraged when it improves:
+
+- clarity
+- maintainability
+- testability
+
+Avoid introducing abstractions before they are justified.
+
+---
+
+# Architectural Principles
+
+- Prefer composition over inheritance.
+- Favor immutable state.
+- Keep APIs small.
+- Make illegal states difficult to represent.
+- Optimize for readability.
+- Document important decisions.
+
+---
+
+# Summary
+
+Architecture exists to support the product—not the other way around.
+
+Every architectural decision should reduce future complexity while enabling
+future growth.

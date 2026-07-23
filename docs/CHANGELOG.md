@@ -29,6 +29,11 @@ The project follows semantic versioning.
 - Bottom navigation for compact layouts
 - Shared top-level application state
 - Dashboard, Clients, Sessions, Studio, and Settings placeholders
+- Product vision defining the platform mission and audience
+- Engineering handbook defining development standards and practices
+- Architecture guide defining responsibilities and dependency direction
+- UI principles defining the intended Yellow Track experience
+- Product decision record establishing the platform constitution
 
 ## 0.1.0 — Genesis
 
