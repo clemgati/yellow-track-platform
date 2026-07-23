@@ -1,7 +1,7 @@
 package com.yellowtrack.platform.navigation
 
-data class NavigationState(
-    val backStack: List<Destination>,
+data class NavigationState<D : Destination>(
+    val backStack: List<D>,
 ) {
     init {
         require(backStack.isNotEmpty()) {
@@ -9,7 +9,7 @@ data class NavigationState(
         }
     }
 
-    val current: Destination
+    val current: D
         get() = backStack.last()
 
     val canNavigateBack: Boolean

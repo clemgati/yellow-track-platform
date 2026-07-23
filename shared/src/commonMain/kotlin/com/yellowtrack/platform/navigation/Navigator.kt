@@ -1,17 +1,17 @@
 package com.yellowtrack.platform.navigation
 
-class Navigator(
-    startDestination: Destination,
+class Navigator<D : Destination>(
+    startDestination: D,
 ) {
     private var currentState =
         NavigationState(
             backStack = listOf(startDestination),
         )
 
-    val state: NavigationState
+    val state: NavigationState<D>
         get() = currentState
 
-    fun navigate(destination: Destination) {
+    fun navigate(destination: D) {
         if (destination == currentState.current) {
             return
         }
@@ -22,19 +22,17 @@ class Navigator(
             )
     }
 
-    fun navigateTopLevel(destination: Destination) {
+    fun navigateTopLevel(destination: D) {
         reset(destination)
     }
 
-    fun replace(destination: Destination) {
-        val updatedBackStack =
-            currentState.backStack
-                .dropLast(1)
-                .plus(destination)
-
+    fun replace(destination: D) {
         currentState =
             currentState.copy(
-                backStack = updatedBackStack,
+                backStack =
+                    currentState.backStack
+                        .dropLast(1)
+                        .plus(destination),
             )
     }
 
@@ -49,7 +47,7 @@ class Navigator(
             )
     }
 
-    fun reset(destination: Destination) {
+    fun reset(destination: D) {
         currentState =
             NavigationState(
                 backStack = listOf(destination),
