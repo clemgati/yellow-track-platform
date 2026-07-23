@@ -34,6 +34,15 @@ The project follows semantic versioning.
 - Architecture guide defining responsibilities and dependency direction
 - UI principles defining the intended Yellow Track experience
 - Product decision record establishing the platform constitution
+- Shared framework-independent navigation engine
+- Typed application destinations
+- Immutable navigation back-stack state
+- Navigation behavior and application-state tests
+
+### Changed
+
+- Responsive application shell now uses shared navigation state
+- Top-level destination changes reset navigation history
 
 ## 0.1.0 — Genesis
 
