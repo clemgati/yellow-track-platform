@@ -47,6 +47,12 @@ kotlin {
         }
     }
 
+    // ...
+    @OptIn(org.jetbrains.kotlin.gradle.ExperimentalWasmDsl::class)
+    wasmJs {
+        browser()
+    }
+
     sourceSets {
         androidMain.dependencies {
             implementation(libs.compose.uiToolingPreview)
@@ -61,10 +67,26 @@ kotlin {
             implementation(libs.compose.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodelCompose)
             implementation(libs.androidx.lifecycle.runtimeCompose)
+            implementation(libs.koin.core)
+            // Add only when shared Compose code injects dependencies directly.
+            implementation(libs.koin.compose)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
         }
+
+        /*wasmJsMain.dependencies {
+            // Wasm-specific dependencies
+
+           // wasmJsMain.dependencies {
+                implementation(":shared")
+
+                implementation(libs.compose.runtime)
+                implementation(libs.compose.foundation)
+                implementation(libs.compose.material3)
+                implementation(libs.compose.ui)
+           // }
+        }*/
     }
 }
 
