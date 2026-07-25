@@ -9,7 +9,7 @@ plugins {
 kotlin {
 
     androidLibrary {
-        namespace = "com.yellowtrack.platform.feature.dashboard"
+        namespace = "com.yellowtrack.platform.core.ui"
         compileSdk =
             libs.versions.android.compileSdk
                 .get()
@@ -25,7 +25,6 @@ kotlin {
     }
 
     jvm("desktop")
-
     iosArm64()
     iosSimulatorArm64()
 
@@ -37,7 +36,6 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(project(":shared:core:designsystem"))
-            implementation(project(":shared:core:ui"))
 
             implementation(libs.compose.runtime)
             implementation(libs.compose.foundation)

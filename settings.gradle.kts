@@ -45,3 +45,5 @@ include(":shared:feature:clients")
 include(":shared:feature:settings")
 include(":shared:feature:sessions")
 include(":shared:feature:studio")
+
+include(":shared:core:ui")
