@@ -34,4 +34,14 @@ plugins {
 include(":androidApp")
 include(":desktopApp")
 include(":webApp")
-include(":shared")
+
+include(":shared:app")
+
+include(":shared:core:designsystem")
+include(":shared:core:navigation")
+
+include(":shared:feature:dashboard")
+include(":shared:feature:clients")
+include(":shared:feature:settings")
+include(":shared:feature:sessions")
+include(":shared:feature:studio")
