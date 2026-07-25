@@ -115,11 +115,12 @@ private fun SidebarDestination(
             Icon(
                 imageVector = destination.icon,
                 contentDescription = null,
-                tint = if (selected) {
-                    YTTheme.colors.primary
-                } else {
-                    YTTheme.colors.onSurfaceVariant
-                },
+                tint =
+                    if (selected) {
+                        YTTheme.colors.primary
+                    } else {
+                        YTTheme.colors.onSurfaceVariant
+                    },
             )
 
             Text(
