@@ -8,8 +8,5 @@ class YellowTrackApplication : Application() {
         super.onCreate()
 
         initKoinAndroid(this)
-        // initKoinAndroid {
-        //    androidContext(this@YellowTrackApplication)
-        // }
     }
 }
