@@ -36,7 +36,11 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
+            implementation(project(":shared:core:model"))
+
             implementation(project(":shared:core:designsystem"))
+            implementation(project(":shared:core:ui"))
+
             implementation(libs.compose.runtime)
             implementation(libs.compose.foundation)
             implementation(libs.compose.material3)

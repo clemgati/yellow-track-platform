@@ -36,6 +36,8 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
+            implementation(project(":shared:core:model"))
+
             implementation(project(":shared:core:designsystem"))
             implementation(project(":shared:core:ui"))
 
@@ -44,10 +46,18 @@ kotlin {
             implementation(libs.compose.material3)
             implementation(libs.compose.ui)
             implementation(libs.compose.components.resources)
+
+            implementation(libs.compose.uiToolingPreview)
         }
 
         commonTest.dependencies {
             implementation(libs.kotlin.test)
         }
     }
+}
+
+// Required by Android Studio's preview renderer.
+// This must be outside kotlin { }.
+dependencies {
+    androidRuntimeClasspath(libs.compose.uiTooling)
 }
