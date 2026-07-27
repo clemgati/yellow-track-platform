@@ -1,12 +1,9 @@
 package com.yellowtrack.platform.app
 
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ListAlt
 import androidx.compose.material.icons.filled.Dashboard
-import androidx.compose.material.icons.filled.Groups
 import androidx.compose.material.icons.filled.Settings
-import androidx.compose.material.icons.filled.Storefront
 import androidx.compose.ui.graphics.vector.ImageVector
+import com.yellowtrack.platform.core.designsystem.component.YTIcons
 
 enum class AppDestination(
     val route: String,
@@ -16,30 +13,30 @@ enum class AppDestination(
     Dashboard(
         route = "dashboard",
         label = "Dashboard",
-        icon = Icons.Default.Dashboard,
+        icon = YTIcons.Dashboard,
     ),
 
     Clients(
         route = "clients",
         label = "Clients",
-        icon = Icons.Default.Groups,
+        icon = YTIcons.Clients,
     ),
 
     Sessions(
         route = "sessions",
         label = "Sessions",
-        icon = Icons.AutoMirrored.Filled.ListAlt,
+        icon = YTIcons.Sessions,
     ),
 
     Studio(
         route = "studio",
         label = "Studio",
-        icon = Icons.Default.Storefront,
+        icon = YTIcons.Studio,
     ),
 
     Settings(
         route = "settings",
         label = "Settings",
-        icon = Icons.Default.Settings,
+        icon = YTIcons.Settings,
     ),
 }

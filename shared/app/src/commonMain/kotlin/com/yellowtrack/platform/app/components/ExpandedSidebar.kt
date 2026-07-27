@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -19,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.yellowtrack.platform.app.AppDestination
 import com.yellowtrack.platform.core.designsystem.component.YTBadge
+import com.yellowtrack.platform.core.designsystem.component.YTIcon
 import com.yellowtrack.platform.core.designsystem.theme.YTTheme
 
 @Composable
@@ -112,9 +112,9 @@ private fun SidebarDestination(
                     YTTheme.spacing.medium,
                 ),
         ) {
-            Icon(
-                imageVector = destination.icon,
-                contentDescription = null,
+            YTIcon(
+                icon = destination.icon,
+                contentDescription = destination.label,
                 tint =
                     if (selected) {
                         YTTheme.colors.primary

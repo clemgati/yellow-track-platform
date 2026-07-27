@@ -1,6 +1,5 @@
 package com.yellowtrack.platform.app.components
 
-import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
@@ -8,6 +7,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.style.TextOverflow
 import com.yellowtrack.platform.app.AppDestination
+import com.yellowtrack.platform.core.designsystem.component.YTIcon
 import com.yellowtrack.platform.core.designsystem.theme.YTTheme
 
 @Composable
@@ -36,8 +36,8 @@ fun CompactNavigationBar(
                         unselectedTextColor = YTTheme.colors.onSurfaceVariant,
                     ),
                 icon = {
-                    Icon(
-                        imageVector = destination.icon,
+                    YTIcon(
+                        icon = destination.icon,
                         contentDescription = destination.label,
                     )
                 },
