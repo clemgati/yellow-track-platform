@@ -38,6 +38,7 @@ include(":webApp")
 include(":shared:app")
 
 include(":shared:core:designsystem")
+include(":shared:core:model")
 include(":shared:core:navigation")
 
 include(":shared:feature:dashboard")

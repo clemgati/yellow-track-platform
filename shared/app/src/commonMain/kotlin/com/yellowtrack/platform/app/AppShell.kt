@@ -12,8 +12,8 @@ import com.yellowtrack.platform.app.components.CompactNavigationBar
 import com.yellowtrack.platform.app.components.ExpandedSidebar
 import com.yellowtrack.platform.core.designsystem.component.YTScaffold
 import com.yellowtrack.platform.core.designsystem.theme.YTTheme
-import com.yellowtrack.platform.feature.clients.presentation.ClientsScreen
-import com.yellowtrack.platform.feature.dashboard.presentation.DashboardScreen
+import com.yellowtrack.platform.feature.clients.ClientsRoute
+import com.yellowtrack.platform.feature.dashboard.DashboardRoute
 import com.yellowtrack.platform.feature.sessions.presentation.SessionsScreen
 import com.yellowtrack.platform.feature.settings.presentation.SettingsScreen
 import com.yellowtrack.platform.feature.studio.presentation.StudioScreen
@@ -88,10 +88,14 @@ private fun CurrentDestination(
 ) {
     when (destination) {
         AppDestination.Dashboard ->
-            DashboardScreen(modifier)
+            DashboardRoute(
+                modifier = modifier,
+            )
 
         AppDestination.Clients ->
-            ClientsScreen(modifier)
+            ClientsRoute(
+                modifier = modifier,
+            )
 
         AppDestination.Sessions ->
             SessionsScreen(modifier)
