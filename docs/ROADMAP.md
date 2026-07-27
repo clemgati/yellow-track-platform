@@ -81,3 +81,23 @@ The roadmap uses semantic versioning and milestone codenames.
 - Stable data model
 - Documented upgrade path
 - Release and support process
+
+
+v0.2.x
+✓ Foundation
+✓ Dashboard
+✓ Clients Foundation
+
+v0.3.x
+□ Client Details
+□ Add/Edit Client
+□ Search
+
+v0.4.x
+□ Sessions
+
+v0.5.x
+□ Studio
+
+v0.6.x
+□ Persistence

@@ -23,6 +23,9 @@ fun ClientsRoute(modifier: Modifier = Modifier) {
     ClientsScreen(
         uiState = uiState,
         onRetry = viewModel::retry,
+        onClientSelected = { clientId ->
+            // YTP-013B: navigate to Client Details.
+        },
         modifier = modifier,
     )
 }

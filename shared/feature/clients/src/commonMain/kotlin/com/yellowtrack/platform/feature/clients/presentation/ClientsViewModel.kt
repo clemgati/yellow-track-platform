@@ -66,8 +66,9 @@ internal class ClientsViewModel(
                     it.copy(
                         clients =
                             UiState.Error(
-                                throwable.message
-                                    ?: "Unable to load clients.",
+                                message =
+                                    throwable.message
+                                        ?: "Unable to load clients.",
                             ),
                     )
                 }
