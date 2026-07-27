@@ -7,21 +7,22 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.yellowtrack.platform.core.designsystem.component.YTBadge
 import com.yellowtrack.platform.core.designsystem.component.YTSectionCard
 import com.yellowtrack.platform.core.designsystem.theme.YTTheme
+import com.yellowtrack.platform.core.model.client.ClientId
 import com.yellowtrack.platform.core.ui.component.EmptyContent
 import com.yellowtrack.platform.core.ui.component.StatefulContent
 import com.yellowtrack.platform.feature.clients.presentation.component.ClientSummaryRow
+import com.yellowtrack.platform.feature.clients.presentation.component.ClientsHeader
 import com.yellowtrack.platform.feature.clients.presentation.model.ClientSummary
 
 @Composable
 internal fun ClientsScreen(
     uiState: ClientsUiState,
     onRetry: () -> Unit,
+    onClientSelected: (ClientId) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     StatefulContent(
@@ -36,6 +37,7 @@ internal fun ClientsScreen(
     ) { clients, contentModifier ->
         ClientsContent(
             clients = clients,
+            onClientSelected = onClientSelected,
             modifier = contentModifier,
         )
     }
@@ -44,6 +46,7 @@ internal fun ClientsScreen(
 @Composable
 private fun ClientsContent(
     clients: List<ClientSummary>,
+    onClientSelected: (ClientId) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -57,7 +60,9 @@ private fun ClientsContent(
                 YTTheme.spacing.large,
             ),
     ) {
-        ClientsHeader()
+        ClientsHeader(
+            clientCount = clients.size,
+        )
 
         YTSectionCard(
             title = "All Clients",
@@ -66,36 +71,10 @@ private fun ClientsContent(
             clients.forEach { client ->
                 ClientSummaryRow(
                     client = client,
+                    onClick = onClientSelected,
                 )
             }
         }
-    }
-}
-
-@Composable
-private fun ClientsHeader(modifier: Modifier = Modifier) {
-    Column(
-        modifier = modifier,
-        verticalArrangement =
-            Arrangement.spacedBy(
-                YTTheme.spacing.small,
-            ),
-    ) {
-        YTBadge(
-            text = "Clients",
-        )
-
-        Text(
-            text = "Clients",
-            style = YTTheme.typography.headlineLarge,
-            color = YTTheme.colors.onBackground,
-        )
-
-        Text(
-            text = "Manage client profiles, contact details, preferences, and session history.",
-            style = YTTheme.typography.bodyLarge,
-            color = YTTheme.colors.onSurfaceVariant,
-        )
     }
 }
 
@@ -104,6 +83,6 @@ private fun ClientsEmptyContent(modifier: Modifier = Modifier) {
     EmptyContent(
         modifier = modifier,
         title = "No clients yet",
-        message = "Your clients will appear here after you add the first one.",
+        message = "Add your first client to begin tracking profiles and sessions.",
     )
 }
