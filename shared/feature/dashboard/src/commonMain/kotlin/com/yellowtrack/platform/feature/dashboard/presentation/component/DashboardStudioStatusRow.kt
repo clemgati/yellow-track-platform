@@ -7,7 +7,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.yellowtrack.platform.core.designsystem.component.YTStatusIndicator
 import com.yellowtrack.platform.core.designsystem.theme.YTTheme
+import com.yellowtrack.platform.feature.dashboard.presentation.extension.status
+import com.yellowtrack.platform.feature.dashboard.presentation.extension.statusContentDescription
 import com.yellowtrack.platform.feature.dashboard.presentation.model.DashboardStudioStatusItem
 
 @Composable
@@ -23,17 +26,10 @@ internal fun DashboardStudioStatusRow(
             ),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        Text(
-            text = if (item.ready) "✓" else "⚠",
-            style = YTTheme.typography.titleMedium,
-            color =
-                if (item.ready) {
-                    YTTheme.colors.primary
-                } else {
-                    YTTheme.colors.error
-                },
+        YTStatusIndicator(
+            status = item.status,
+            contentDescription = item.statusContentDescription,
         )
-
         Text(
             text = item.title,
             style = YTTheme.typography.bodyLarge,
