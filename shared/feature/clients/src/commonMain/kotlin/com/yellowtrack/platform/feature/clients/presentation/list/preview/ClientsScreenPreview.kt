@@ -1,9 +1,9 @@
-package com.yellowtrack.platform.feature.clients.presentation.preview
+package com.yellowtrack.platform.feature.clients.presentation.list.preview
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.yellowtrack.platform.core.designsystem.theme.YellowTrackTheme
-import com.yellowtrack.platform.feature.clients.presentation.ClientsScreen
+import com.yellowtrack.platform.feature.clients.presentation.list.ClientsScreen
 
 @Preview
 @Composable

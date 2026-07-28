@@ -60,6 +60,7 @@ kotlin {
         }
         commonMain.dependencies {
             implementation(project(":shared:core:designsystem"))
+            implementation(project(":shared:core:model"))
             implementation(project(":shared:core:navigation"))
 
             implementation(project(":shared:feature:dashboard"))

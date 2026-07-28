@@ -1,9 +1,9 @@
-package com.yellowtrack.platform.feature.clients.presentation.preview
+package com.yellowtrack.platform.feature.clients.presentation.list.preview
 
 import com.yellowtrack.platform.core.model.client.ClientId
 import com.yellowtrack.platform.core.ui.state.UiState
-import com.yellowtrack.platform.feature.clients.presentation.ClientsUiState
-import com.yellowtrack.platform.feature.clients.presentation.model.ClientSummary
+import com.yellowtrack.platform.feature.clients.presentation.list.ClientsUiState
+import com.yellowtrack.platform.feature.clients.presentation.list.model.ClientSummary
 
 internal object ClientsPreviewData {
     val johnSmith =

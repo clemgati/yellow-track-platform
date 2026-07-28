@@ -12,11 +12,9 @@ import com.yellowtrack.platform.app.components.CompactNavigationBar
 import com.yellowtrack.platform.app.components.ExpandedSidebar
 import com.yellowtrack.platform.core.designsystem.component.YTScaffold
 import com.yellowtrack.platform.core.designsystem.theme.YTTheme
+import com.yellowtrack.platform.feature.clients.ClientDetailsRoute
 import com.yellowtrack.platform.feature.clients.ClientsRoute
 import com.yellowtrack.platform.feature.dashboard.DashboardRoute
-import com.yellowtrack.platform.feature.sessions.presentation.SessionsScreen
-import com.yellowtrack.platform.feature.settings.presentation.SettingsScreen
-import com.yellowtrack.platform.feature.studio.presentation.StudioScreen
 
 @Composable
 fun AppShell(
@@ -56,7 +54,7 @@ private fun ExpandedAppShell(appState: AppState) {
                 onDestinationSelected = appState::navigateTopLevel,
             )
             CurrentDestination(
-                destination = appState.currentDestination,
+                appState,
                 modifier = Modifier.weight(1f),
             )
         }
@@ -75,7 +73,7 @@ private fun CompactAppShell(appState: AppState) {
         },
     ) { contentPadding ->
         CurrentDestination(
-            destination = appState.currentDestination,
+            appState,
             modifier = Modifier.padding(contentPadding),
         )
     }
@@ -83,28 +81,56 @@ private fun CompactAppShell(appState: AppState) {
 
 @Composable
 private fun CurrentDestination(
-    destination: AppDestination,
+    appState: AppState,
     modifier: Modifier = Modifier,
 ) {
-    when (destination) {
+    when (appState.currentDestination) {
         AppDestination.Dashboard ->
             DashboardRoute(
                 modifier = modifier,
             )
 
         AppDestination.Clients ->
-            ClientsRoute(
+            ClientsDestination(
+                appState = appState,
                 modifier = modifier,
             )
 
-        AppDestination.Sessions ->
-            SessionsScreen(modifier)
+        AppDestination.Sessions -> {}
 
-        AppDestination.Studio ->
-            StudioScreen(modifier)
+        AppDestination.Studio -> {}
 
-        AppDestination.Settings ->
-            SettingsScreen(modifier)
+        AppDestination.Settings -> {}
+    }
+}
+
+@Composable
+private fun ClientsDestination(
+    appState: AppState,
+    modifier: Modifier = Modifier,
+) {
+    val selectedClientId = appState.selectedClientId
+
+    if (selectedClientId == null) {
+        ClientsRoute(
+            onClientSelected = appState::openClient,
+            modifier = modifier,
+        )
+    } else {
+        ClientDetailsRoute(
+            clientId = selectedClientId,
+            onBack = appState::closeClientDetails,
+            onScheduleSession = { clientId ->
+                // YTP-014: open session scheduling for clientId.
+            },
+            onEditClient = { clientId ->
+                // YTP-013C: open the client editor for clientId.
+            },
+            onArchiveClient = { clientId ->
+                // Future: show archive confirmation for clientId.
+            },
+            modifier = modifier,
+        )
     }
 }
 

@@ -5,12 +5,16 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import com.yellowtrack.platform.core.model.client.ClientId
 import com.yellowtrack.platform.feature.clients.data.InMemoryClientRepository
-import com.yellowtrack.platform.feature.clients.presentation.ClientsScreen
-import com.yellowtrack.platform.feature.clients.presentation.ClientsViewModel
+import com.yellowtrack.platform.feature.clients.presentation.list.ClientsScreen
+import com.yellowtrack.platform.feature.clients.presentation.list.ClientsViewModel
 
 @Composable
-fun ClientsRoute(modifier: Modifier = Modifier) {
+fun ClientsRoute(
+    onClientSelected: (ClientId) -> Unit,
+    modifier: Modifier = Modifier,
+) {
     val viewModel =
         remember {
             ClientsViewModel(
@@ -23,9 +27,7 @@ fun ClientsRoute(modifier: Modifier = Modifier) {
     ClientsScreen(
         uiState = uiState,
         onRetry = viewModel::retry,
-        onClientSelected = { clientId ->
-            // YTP-013B: navigate to Client Details.
-        },
+        onClientSelected = onClientSelected,
         modifier = modifier,
     )
 }

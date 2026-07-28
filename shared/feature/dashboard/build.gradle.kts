@@ -9,7 +9,7 @@ plugins {
 kotlin {
 
     androidLibrary {
-        namespace = "com.yellowtrack.platform.feature.dashboard"
+        namespace = "com.yellowtrack.platform.feature.clientdetails"
         compileSdk =
             libs.versions.android.compileSdk
                 .get()

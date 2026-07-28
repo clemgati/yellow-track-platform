@@ -5,27 +5,34 @@ import com.yellowtrack.platform.core.model.client.ClientId
 import com.yellowtrack.platform.feature.clients.domain.ClientRepository
 
 internal class InMemoryClientRepository : ClientRepository {
-    override suspend fun getClients(): List<Client> =
+    private val clients =
         listOf(
             Client(
-                id = ClientId("1"),
+                id = ClientId("client-1"),
                 firstName = "John",
                 lastName = "Smith",
             ),
             Client(
-                id = ClientId("2"),
+                id = ClientId("client-2"),
                 firstName = "Sarah",
                 lastName = "Johnson",
             ),
             Client(
-                id = ClientId("3"),
+                id = ClientId("client-3"),
                 firstName = "Emily",
                 lastName = "Davis",
             ),
             Client(
-                id = ClientId("4"),
+                id = ClientId("client-4"),
                 firstName = "Michael",
                 lastName = "Brown",
             ),
         )
+
+    override suspend fun getClients(): List<Client> = clients
+
+    override suspend fun getClient(clientId: ClientId): Client? =
+        clients.firstOrNull { client ->
+            client.id == clientId
+        }
 }
