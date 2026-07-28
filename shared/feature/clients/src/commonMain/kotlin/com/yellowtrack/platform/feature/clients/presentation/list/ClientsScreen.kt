@@ -1,4 +1,4 @@
-package com.yellowtrack.platform.feature.clients.presentation
+package com.yellowtrack.platform.feature.clients.presentation.list
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -14,9 +14,9 @@ import com.yellowtrack.platform.core.designsystem.theme.YTTheme
 import com.yellowtrack.platform.core.model.client.ClientId
 import com.yellowtrack.platform.core.ui.component.EmptyContent
 import com.yellowtrack.platform.core.ui.component.StatefulContent
-import com.yellowtrack.platform.feature.clients.presentation.component.ClientSummaryRow
 import com.yellowtrack.platform.feature.clients.presentation.component.ClientsHeader
-import com.yellowtrack.platform.feature.clients.presentation.model.ClientSummary
+import com.yellowtrack.platform.feature.clients.presentation.list.component.ClientSummaryRow
+import com.yellowtrack.platform.feature.clients.presentation.list.model.ClientSummary
 
 @Composable
 internal fun ClientsScreen(

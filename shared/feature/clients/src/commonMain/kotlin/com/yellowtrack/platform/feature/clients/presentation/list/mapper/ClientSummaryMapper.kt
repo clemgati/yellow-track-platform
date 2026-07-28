@@ -1,7 +1,7 @@
-package com.yellowtrack.platform.feature.clients.presentation.mapper
+package com.yellowtrack.platform.feature.clients.presentation.list.mapper
 
 import com.yellowtrack.platform.core.model.client.Client
-import com.yellowtrack.platform.feature.clients.presentation.model.ClientSummary
+import com.yellowtrack.platform.feature.clients.presentation.list.model.ClientSummary
 
 internal fun List<Client>.toClientSummaries(): List<ClientSummary> = map(Client::toClientSummary)
 

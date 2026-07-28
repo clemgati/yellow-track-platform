@@ -1,8 +1,9 @@
-package com.yellowtrack.platform.feature.clients.presentation
+package com.yellowtrack.platform.feature.clients.presentation.details
 
+import com.yellowtrack.platform.core.model.client.ClientId
 import com.yellowtrack.platform.core.ui.state.UiState
 import com.yellowtrack.platform.feature.clients.domain.ClientRepository
-import com.yellowtrack.platform.feature.clients.presentation.mapper.toClientSummaries
+import com.yellowtrack.platform.feature.clients.presentation.details.mapper.toClientDetailsModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -12,7 +13,8 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-internal class ClientsViewModel(
+internal class ClientDetailsViewModel(
+    private val clientId: ClientId,
     private val clientRepository: ClientRepository,
 ) {
     private val scope =
@@ -22,41 +24,43 @@ internal class ClientsViewModel(
 
     private val _uiState =
         MutableStateFlow(
-            ClientsUiState(
-                clients = UiState.Loading,
+            ClientDetailsUiState(
+                client = UiState.Loading,
             ),
         )
 
-    val uiState: StateFlow<ClientsUiState> =
+    val uiState: StateFlow<ClientDetailsUiState> =
         _uiState.asStateFlow()
 
     init {
-        loadClients()
+        loadClient()
     }
 
     fun retry() {
-        loadClients()
+        loadClient()
     }
 
-    private fun loadClients() {
+    private fun loadClient() {
         _uiState.update {
             it.copy(
-                clients = UiState.Loading,
+                client = UiState.Loading,
             )
         }
 
         scope.launch {
             runCatching {
-                clientRepository.getClients()
-            }.onSuccess { clients ->
+                clientRepository.getClient(clientId)
+            }.onSuccess { client ->
                 _uiState.update {
                     it.copy(
-                        clients =
-                            if (clients.isEmpty()) {
-                                UiState.Empty
+                        client =
+                            if (client == null) {
+                                UiState.Error(
+                                    message = "Client could not be found.",
+                                )
                             } else {
                                 UiState.Success(
-                                    clients.toClientSummaries(),
+                                    client.toClientDetailsModel(),
                                 )
                             },
                     )
@@ -64,11 +68,11 @@ internal class ClientsViewModel(
             }.onFailure { throwable ->
                 _uiState.update {
                     it.copy(
-                        clients =
+                        client =
                             UiState.Error(
                                 message =
                                     throwable.message
-                                        ?: "Unable to load clients.",
+                                        ?: "Unable to load client details.",
                             ),
                     )
                 }
